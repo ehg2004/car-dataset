@@ -14,7 +14,7 @@ def parse_string(raw_string):
 
 # Define input and output files
 json_file = "CaseData.json"
-csv_file = "processed_dataset1.csv"
+csv_file = "processed_dataset2.csv"
 
 with open('CaseData.json') as f:
 #Como dataset contem um vetor de carros, podemos carrega-los dessa forma
@@ -29,9 +29,6 @@ preprocessed_cars=[]
 hashed_keys = {"listing_id", "vehicle_plate", "vehicle_category", "color", "gearbox", "dealer_id"}
 #palavras-chave a serem removidas#
 
-diferentials_set = set()
-equipaments_set = set()
-
 diferentials_list=[]
 equipaments_list=[]
 for i,car in enumerate(cars):
@@ -39,9 +36,9 @@ for i,car in enumerate(cars):
     #     break
     
     diferentials=parse_string(car["diferentials"])
-    print(diferentials)
+    # print(diferentials)
     equipaments=parse_string(car["equipaments"])
-    print(equipaments)
+    # print(equipaments)
     for diferential in diferentials:
         if diferential not in diferentials_list:
             diferentials_list.append(diferential)
@@ -52,8 +49,8 @@ for i,car in enumerate(cars):
 diferentials_list = sorted(diferentials_list)
 equipaments_list = sorted(equipaments_list)
 
-print(diferentials_list)
-print(equipaments_list)
+# print(diferentials_list)
+# print(equipaments_list)
 
 
 data=[]
@@ -78,7 +75,7 @@ for key in cars[0].keys():
     if isinstance(cars[0][key],(int,float,datetime)) is False and (key not in listed_keys) and (key not in time_keys) and (key not in year_keys):
         to_encoder.append(key)
 
-print(to_encoder)
+# print(to_encoder)
 
 # import time
 # time.sleep(30)
@@ -130,13 +127,13 @@ for i,car in enumerate(cars):
     try:
         car_equipaments=parse_string(car["equipaments"])
     except:
-        print(car["equipaments"])
+        # print(car["equipaments"])
         break   
 
 
     preprocessed_car["equipaments_counter"]=len(car_equipaments)
-    if len(car_equipaments) >60:
-        print(car_equipaments)
+    # if len(car_equipaments) >60:
+    #     # print(car_equipaments)
     for equipament in equipaments_list:
         key=f"equipament_{equipament.replace(' ', '_')}"
         #identifica a presença
@@ -149,7 +146,7 @@ for i,car in enumerate(cars):
     try:
         car_diferentials=parse_string(car["diferentials"])
     except:
-        print(car["diferentials"])
+        # print(car["diferentials"])
         break   
 
     preprocessed_car["diferentials_counter"]=len(car_diferentials)
